@@ -1,11 +1,12 @@
-import React from "react";
-import { View, Text } from 'react-native'
+import React from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
 const Home = () => {
     return (
-        <View>
-            <Text>Welcome to ART Work</Text>
-            <Text>ART will never let you forget your task...</Text>
-        </View>
+        <SafeAreaView>
+            <View>
+                <Text>'Welcome to ART Work'</Text>
+            </View>
+        </SafeAreaView>
     );
 }
-export default Home
+export default Home;
