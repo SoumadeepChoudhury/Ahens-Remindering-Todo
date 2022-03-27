@@ -4,20 +4,26 @@ import { Calendar } from 'react-native-calendars';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
+
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
-// function selelectedDate(date = "") {
-//     return date
-// }
 today = mm + '/' + dd + '/' + yyyy;
+
+
 const Home = () => {
+    state = {
+        markedData: ['2022-03-28']
+    }
+    let dates = {};
+    state.markedData.forEach((val) => {
+        dates[val] = { selected: true, selectedColor: '#03CAD9', selectedTextColor: 'black' };
+    });
     const addTodo = () => {
-        console.log("Hh")
-        alert('Todo added...')
+        console.log(dates)
     };
-    // var date = ""
     return (
         <SafeAreaView style={{ backgroundColor: '#124267', height: windowHeight, width: windowWidth, paddingTop: windowHeight / 39.96 }}>
             <View>
@@ -51,10 +57,12 @@ const Home = () => {
                             textDayHeaderFontSize: windowHeight / 49.45
                         }}
                         minDate={yyyy + '-' + mm + '-' + dd}
+                        disableAllTouchEventsForDisabledDays={true}
                         enableSwipeMonths
-                        onDayPress={day => {
-                            date = String(day.dateString);
-                        }}
+                        // onDayPress={day => {
+                        //     dates[0] = String(day.dateString);
+                        // }}
+                        markedDates={dates}
                     />
                 </View>
             </View>
@@ -95,7 +103,6 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         paddingVertical: windowWidth / 21,
         paddingHorizontal: windowWidth / 3.96,
-        // backgroundColor: '#142E43',
         backgroundColor: '#03CAD9',
     },
     buttonText: {
