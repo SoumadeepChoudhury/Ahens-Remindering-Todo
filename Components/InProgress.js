@@ -3,13 +3,15 @@ import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const Progress = () => {
+const Progress = ({ route, navigation }) => {
+    const { date } = route.params;
     return (
         <SafeAreaView style={{ backgroundColor: '#124267', height: windowHeight, width: windowWidth }}>
             <View style={styles.head}>
                 <View>
                     <Text style={styles.head}
-                    >I N  P R O G R E S S </Text>
+                    >I N  P R O G R E S S</Text>
+                    <Text>{date}</Text>
                 </View>
             </View>
         </SafeAreaView>
