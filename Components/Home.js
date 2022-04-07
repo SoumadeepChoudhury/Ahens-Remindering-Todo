@@ -17,7 +17,6 @@ today = String(yyyy + '-' + mm + '-' + dd);
 
 var runs = 0
 const Home = ({ navigation }) => {
-    var userDate = existingDates
     // useEffect(() => {
     //     if (userDate.includes(today)) {
     //         upcomingTodo();
@@ -47,6 +46,7 @@ const Home = ({ navigation }) => {
     var Status = ' '
     var Target = ' '
 
+    var userDate = existingDates
     // var upcomingTodo = JSON.stringify(details)
     state = {
         markedData: [existingDates]
@@ -61,7 +61,7 @@ const Home = ({ navigation }) => {
     } else {
         state.markedData[0].forEach((val) => {
             dates[val] = { selected: true, selectedColor: '#03CAD9', selectedTextColor: 'black' }
-            console.log("Marked", dates);
+            // console.log("Marked", dates);
         });
     }
 
@@ -140,8 +140,8 @@ const Home = ({ navigation }) => {
                 </View>
                 <View style={styles.footer}>
                     <TouchableOpacity onPress={() => { console.log("View CT"); }}>
-                        <View style={styles.buttonUpcomingTodo}>
-                            <Text style={styles.buttonUpText}>
+                        <View style={styles.buttonViewDone}>
+                            <Text style={styles.buttonDoneText}>
                                 View Completed Tasks
                             </Text>
                         </View>
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: 'row',
         elevation: 40,
-        borderRadius: 25,
+        borderRadius: 29,
         marginBottom: -24,
         paddingVertical: 13,
         paddingHorizontal: 100,
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
         margin: 20,
         marginTop: 80
     },
-    buttonUpcomingTodo: {
+    buttonViewDone: {
         flex: 1,
         marginBottom: 50,
         elevation: 100,
@@ -295,17 +295,18 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#03CAD9",
         paddingVertical: 15,
-        paddingHorizontal: 88,
+        paddingHorizontal: windowWidth / 4.5,
         justifyContent: 'space-evenly',
         alignItems: 'center'
     },
-    buttonUpText: {
+    buttonDoneText: {
         elevation: 30,
         color: '#03CAD9',
         fontWeight: 'bold',
         fontStyle: 'italic',
         fontFamily: 'serif',
         fontSize: 15,
+        paddingLeft: 2.21,
         textAlign: 'center',
     },
     addIcon: {
