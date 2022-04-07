@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, TextInput, Modal, Alert, ScrollView, StatusBar } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -130,20 +130,24 @@ const Home = ({ navigation }) => {
                             disableAllTouchEventsForDisabledDays={true}
                             enableSwipeMonths
                             onDayPress={day => {
-                                navigation.navigate('Progress', {
-                                    date: day.dateString
-                                });
+                                navigation.navigate('Details');
+                                // navigation.navigate('Details', {
+                                //     date: day.dateString
+                                // });
                             }}
                             markedDates={dates}
                         />
                     </View>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity onPress={() => { console.log("View CT"); }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Done'); }}>
                         <View style={styles.buttonViewDone}>
                             <Text style={styles.buttonDoneText}>
                                 View Completed Tasks
                             </Text>
+                            <View style={styles.addIcon}>
+                                <AntDesign name='arrowright' size={30} color='#03CAD9' />
+                            </View>
                         </View>
                     </TouchableOpacity>
                 </View >
@@ -285,6 +289,7 @@ const styles = StyleSheet.create({
     },
     buttonViewDone: {
         flex: 1,
+        flexDirection: 'row',
         marginBottom: 50,
         elevation: 100,
         shadowOffset: 30,
@@ -296,7 +301,6 @@ const styles = StyleSheet.create({
         borderColor: "#03CAD9",
         paddingVertical: 15,
         paddingHorizontal: windowWidth / 4.5,
-        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
     buttonDoneText: {
@@ -306,13 +310,13 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         fontFamily: 'serif',
         fontSize: 15,
-        paddingLeft: 2.21,
+        marginRight: -15,
         textAlign: 'center',
     },
     addIcon: {
         marginLeft: 80,
         marginRight: -90,
-        width: 30
+        // paddingRight: 20
     }
 });
 export default Home;

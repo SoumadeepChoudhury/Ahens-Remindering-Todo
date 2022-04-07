@@ -3,13 +3,13 @@ import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const Progress = () => {
+const Todo = () => {
     return (
         <SafeAreaView style={{ backgroundColor: '#124267', height: windowHeight, width: windowWidth }}>
             <View style={styles.headOuter}></View>
             <View style={styles.headMid}></View>
             <View style={styles.headInner}>
-                <Text style={styles.headText}>PROGRESS</Text>
+                <Text style={styles.headText}>TODO</Text>
             </View>
         </SafeAreaView>
     );
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
         fontFamily: 'serif'
     }
 });
-export default Progress;
+export default Todo;
