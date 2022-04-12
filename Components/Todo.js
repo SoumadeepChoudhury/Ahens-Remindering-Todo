@@ -34,24 +34,17 @@ const Todo = ({ route }) => {
     const [stateModal, setStateModal] = useState(false);
     const [stateDetails, setStateDetails] = useState(false);
 
-    const notify = (Time, titleName, desc, time) => {
-        PushNotification.localNotificationSchedule({
-            id: String(date) + String(Time),
-            channelId: String(new Date().getMilliseconds),
-            showWhen: true,
-            autoCancel: true,
-            largeIcon: "icon",
-            smallIcon: "icon",
-            bigText: "Your upcoming todo is in operation",
-            bigLargeIcon: "icon",
-            color: "#124267",
-            vibrate: true,
-            vibration: 300,
-            ignoreInForeground: false,
+    const notify = (date, Time, titleName, desc, time) => {
+        PushNotification.localNotification({
+            id: date.concat(Time),
+            channelId: '#12@1snh',
             title: titleName,
             message: desc,
-            playSound: true,
-            soundName: "default",
+            smallIcon: "icon",
+            largeIcon: "icon",
+            bigLargeIcon: "icon",
+            color: '#124267',
+            bigText: "Your upcoming todo is in operation",
             date: new Date(Date.now() + time * 1000),
             allowWhileIdle: true,
         });
@@ -76,6 +69,12 @@ const Todo = ({ route }) => {
             return data
         else return []
     };
+    function dateDiffInDays(a, b) {
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / MilliSec);
+    }
     const [todoDetails, setTodoDetails] = useState(async () => [await AsyncStorage.getItem(date).then((val) => { setTodoDetails(getItems(val)); setCount(getItems(val).length); })]);
     const [donelist, setDoneList] = useState(async () => [await AsyncStorage.getItem("Done").then((val) => { setDoneList(getDoneItems(val)) })]);
     const [userDate, setUserDate] = useState(async () => [await AsyncStorage.getItem("Date").then((val) => { setUserDate(getDoneItems(val)) })]);
@@ -130,7 +129,7 @@ const Todo = ({ route }) => {
             Alert.alert("Error!", "You cannot add past day's TODO")
         }
         else if (Priority != "High" && Priority != "Medium" && Priority != "Low") {
-            Alert.alert("Error!", "Enter Status Correctly from \"Todo\"| \"In Progress\"| \"Done\"");
+            Alert.alert("Error!", "Enter Priority Correctly from \"High\"| \"Medium\"| \"Low\"");
         }
         else if (Time != ' ' && TaskTitle != ' ' && Priority != ' ') {
             setStateModal(false);
@@ -153,7 +152,7 @@ const Todo = ({ route }) => {
                     setCount(counts);
                     AllDetails.push(TaskDetails);
                     const InputTaskDetails = JSON.stringify(AllDetails);
-                    notify(String(Time), TaskTitle, Task_Description, remind);
+                    notify(String(date), String(Time), TaskTitle, Task_Description, remind);
                     AsyncStorage.setItem(date, InputTaskDetails);
                     Alert.alert('Success', "Successfully added....");
                 } catch (e) {

@@ -105,7 +105,7 @@ const Home = ({ navigation }) => {
             Alert.alert("Error!", "Enter Status Correctly from \"Todo\"| \"In Progress\"| \"Done\"");
         }
         else if (Priority != "High" && Priority != "Medium" && Priority != "Low") {
-            Alert.alert("Error!", "Enter Status Correctly from \"Todo\"| \"In Progress\"| \"Done\"");
+            Alert.alert("Error!", "Enter Priority Correctly from \"High\"| \"Medium\"| \"Low\"");
         }
         else if (userDate.includes(date)) {
             Alert.alert("Warning!", "Date already contains Todo.. Please Update from there rather than adding new todo...");
