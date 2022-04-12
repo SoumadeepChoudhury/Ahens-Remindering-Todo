@@ -35,7 +35,7 @@ const Todo = ({ route }) => {
     const [stateDetails, setStateDetails] = useState(false);
 
     const notify = (date, Time, titleName, desc, time) => {
-        PushNotification.localNotification({
+        PushNotification.localNotificationSchedule({
             id: date.concat(Time),
             channelId: '#12@1snh',
             title: titleName,
@@ -106,13 +106,13 @@ const Todo = ({ route }) => {
                 {
                     text: "Yes",
                     onPress: () => {
-                        setTodoDetails([]);
                         let userD = userDate.filter(item => item != date);
                         AsyncStorage.setItem("Date", JSON.stringify(userD));
                         AsyncStorage.setItem(date, JSON.stringify([]));
                         Object.values(AllDetails).map(val => {
                             PushNotification.cancelLocalNotification(String(date) + String(val[0]));
                         })
+                        setTodoDetails([]);
                         setCount(0);
                     },
                     style: "destructive",

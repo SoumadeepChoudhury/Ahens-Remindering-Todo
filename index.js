@@ -15,14 +15,6 @@ PushNotification.configure({
     onNotification: function (notification) {
         console.log("NOTIFICATION:", notification);
     },
-    onRegistrationError: function (err) {
-        console.error(err.message, err);
-    },
-    permissions: {
-        alert: true,
-        badge: true,
-        sound: true,
-    },
     requestPermissions: Platform.OS === 'ios',
 });
 

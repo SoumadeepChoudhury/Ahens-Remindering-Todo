@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, Tex
 import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import PushNotification from 'react-native-push-notification';
+import PushNotification, { Importance } from 'react-native-push-notification';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,19 +27,22 @@ const Home = ({ navigation }) => {
         createChannel();
     }, [])
     const createChannel = () => {
-        PushNotification.createChannel(
-            {
-                channelId: "#12@1snh", // (required)
-                channelName: "ART", // (required)
-                channelDescription: "ART NOTIFY", // (optional) default: undefined.
-                importance: 4, // (optional) default: 4. Int value of the Android notification importance
-                vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-            },
-            (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
-        );
+        PushNotification.channelExists("#12@1snh", function (exists) {
+            !exists ?
+                PushNotification.createChannel(
+                    {
+                        channelId: "#12@1snh",
+                        channelName: "ART",
+                        channelDescription: "ART NOTIFY",
+                        importance: Importance.HIGH,
+                        vibrate: true,
+                    },
+                    (created) => console.log(`createChannel returned '${created}'`)
+                ) : ''
+        });
     };
     const notify = (date, Time, titleName, desc, time) => {
-        PushNotification.localNotification({
+        PushNotification.localNotificationSchedule({
             id: date.concat(Time),
             channelId: '#12@1snh',
             title: titleName,
