@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Todo from './Todo';
 import Progress from './InProgress';
 import Done from './Done';
@@ -10,11 +10,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 const Tab = createBottomTabNavigator();
-
-const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const DetailsView = ({ navigation }) => {
-    // const { date } = route.params;
+
+const DetailsView = ({ route }) => {
+    const { date } = route.params;
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator
@@ -24,19 +23,21 @@ const DetailsView = ({ navigation }) => {
                     tabBarStyle: styles.tabNavs
                 }}
             >
-                <Tab.Screen name="Todo" component={Todo} options={{
+                <Tab.Screen name="Todo" component={Todo} initialParams={{ date: date }} options={{
                     tabBarIcon: ({ focused }) => { return <AntDesign name='form' size={20} color={focused ? '#03CAD9' : '#8C9BD8'} /> }
                 }} />
-                <Tab.Screen name="Progress" component={Progress} options={{ tabBarIcon: ({ focused }) => { return <AntDesign name='clockcircleo' size={20} color={focused ? '#03CAD9' : '#8C9BD8'} /> } }} />
-                <Tab.Screen name="Done" component={Done} options={{ tabBarIcon: ({ focused }) => { return <Octicons name='tasklist' size={20} color={focused ? '#03CAD9' : '#8C9BD8'} /> } }} />
+                <Tab.Screen name="Progress" component={Progress} initialParams={{ date: date }} options={{ tabBarIcon: ({ focused }) => { return <AntDesign name='clockcircleo' size={20} color={focused ? '#03CAD9' : '#8C9BD8'} /> } }} />
+                <Tab.Screen name="Done" component={Done} initialParams={{ date: date }} options={{ tabBarIcon: ({ focused }) => { return <Octicons name='tasklist' size={20} color={focused ? '#03CAD9' : '#8C9BD8'} /> } }} />
             </Tab.Navigator>
         </NavigationContainer>
     );
 };
 const styles = StyleSheet.create({
     tabNavs: {
+        elevation: 30,
+        flex: 1,
         position: 'absolute',
-        height: 60,
+        height: windowHeight / 15,
         margin: 10,
         borderRadius: 10,
         borderColor: '#03CAD9',
