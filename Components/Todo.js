@@ -356,7 +356,7 @@ const Todo = ({ route }) => {
                     </View>
                 </View>
             </Modal>
-            <View style={{ height: 50, position: 'relative', marginTop: windowHeight / 1.98, marginHorizontal: 5 }}>
+            <View style={{ height: 50, position: 'relative', marginTop: windowHeight / 1.9, marginHorizontal: 5 }}>
                 <TouchableOpacity onPress={removeTodo}>
                     <View style={styles.buttonViewDone}>
                         <Text style={styles.buttonDoneText}>
@@ -569,7 +569,6 @@ const styles = StyleSheet.create({
     buttonViewDone: {
         position: 'relative',
         flexDirection: 'row',
-        // marginTop: 400,
         elevation: 100,
         shadowOffset: 30,
         shadowColor: '#000000',
