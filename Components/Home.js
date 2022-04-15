@@ -232,7 +232,7 @@ const Home = ({ navigation }) => {
                             <TextInput style={styles.ModalText} placeholder='Enter Date in YYYY-MM-DD.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val.length == 10 && val.charAt(4) == '-' && val.charAt(7) == '-') { date = String(val) } }} />
 
 
-                            <TextInput style={styles.ModalText} placeholder='Enter Time in HH:MM.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && val.charAt(2) == ':' && val.length == 5) { Time = val } }} />
+                            <TextInput style={styles.ModalText} placeholder='Enter Time in HH:MM.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && val.charAt(2) == ':' && val.length == 5) { Time = val } }} />
 
 
                             <TextInput style={styles.ModalText} placeholder='Enter Task Title.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { TaskTitle = val }} />
