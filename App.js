@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import RNBootSplash from "react-native-bootsplash";
+import codePush from "react-native-code-push";
 import Home from './Components/Home';
 import Done from './Components/Done';
 import DetailsView from './Components/DetailsView';
@@ -22,4 +23,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default codePush(App);

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ART</string>
     <string name="default_notification_channel_id">#12@1snh</string>
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
+    <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">lE46YLX-52g9BQ59_oXpaj_OWk0fL_eaHwuLL</string>
 </resources>

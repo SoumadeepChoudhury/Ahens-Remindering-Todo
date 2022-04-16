@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactInstanceManager;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,8 +28,13 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          // packages.add(ReactNativePushNotificationPackage());
+          packages.add(new ReactNativePushNotificationPackage());
           return packages;
+        }
+        
+        @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
         }
 
         @Override
@@ -36,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
           return "index";
         }
       };
+
 
   @Override
   public ReactNativeHost getReactNativeHost() {
