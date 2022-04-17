@@ -110,6 +110,7 @@ const Todo = ({ route }) => {
                         let userD = userDate.filter(item => item != date);
                         AsyncStorage.setItem("Date", JSON.stringify(userD));
                         AsyncStorage.setItem(date, JSON.stringify([]));
+                        AsyncStorage.setItem(`${date}Done`, JSON.stringify([]));
                         Object.values(AllDetails).map(val => {
                             PushNotification.cancelLocalNotification(String(date) + String(val[0]));
                         })
@@ -221,7 +222,7 @@ const Todo = ({ route }) => {
                                     TaskDetails = []
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                                    AsyncStorage.setItem(date, JSON.stringify(RemainingList));
+                                    AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
 
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));

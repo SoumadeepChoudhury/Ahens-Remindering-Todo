@@ -9,14 +9,11 @@ const Done = ({ route }) => {
     const date = route.params.date;
     const getItems = (val) => {
         const data = JSON.parse(val);
-        ("Data", data);
         let Done = []
         if (date == "All") {
             if (data != null) {
                 data.splice(0, 1);
-                (data[0]);
                 data.forEach(val => {
-                    ("Source", val);
                     if (val[5] == 'Done') {
                         Done.push(val)
                     }
@@ -26,20 +23,18 @@ const Done = ({ route }) => {
             if (data != null)
                 data.map(val => {
                     if (val[4] == 'Done') {
-                        (val);
                         Done.push(val)
                     }
                 })
             Done.pop();
         }
-        ("Finally", Done);
         return Done
     };
-    const [DoneDetails, setDoneDetails] = useState(async () => [await AsyncStorage.getItem(`${date == "All" ? "Done" : String(date)}`).then((val) => { setDoneDetails(getItems(val)); setCount(getItems(val).length); })]);
+    const [DoneDetails, setDoneDetails] = useState(async () => [await AsyncStorage.getItem(`${date == "All" ? "Done" : String(date).concat("Done")}`).then((val) => { setDoneDetails(getItems(val)); setCount(getItems(val).length); })]);
     const [count, setCount] = useState(0);
     var items = 0;
     var donelist = DoneDetails;
-    (donelist)
+
     return (
         <SafeAreaView style={{ backgroundColor: '#124267', height: windowHeight, width: windowWidth }}>
             <View style={styles.headOuter}></View>

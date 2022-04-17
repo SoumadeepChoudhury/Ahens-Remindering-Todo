@@ -24,7 +24,6 @@ const Progress = ({ route }) => {
 
     const getItems = (val) => {
         const data = JSON.parse(val);
-        ("Prog", data);
         let InProg = []
         if (data != null)
             data.map(val => {
@@ -130,7 +129,7 @@ const Progress = ({ route }) => {
                                     targettedTime = targettedTime.substring(0, 2) + ":" + "0" + targettedTime[3]
                                         ("Time", targettedTime);
                                 if (currentTime > targettedTime && date == currentDate) {
-                                    ("Done", val)
+
                                     val[4] = "Done"
                                     Time = val[0]
                                     TaskTitle = val[1]
@@ -140,7 +139,7 @@ const Progress = ({ route }) => {
                                     TaskDetails = []
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                                    AsyncStorage.setItem(date, JSON.stringify(RemainingList));
+                                    AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
                                     setCount(count - 1);
