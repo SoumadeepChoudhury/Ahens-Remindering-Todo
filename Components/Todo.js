@@ -8,6 +8,7 @@ import PushNotification from 'react-native-push-notification';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+const MilliSec = 1000 * 60 * 60 * 24;
 let currentTime = String(new Date().getHours()) + ":" + String(new Date().getMinutes())
 if (currentTime[1] == ":")
     currentTime = '0' + currentTime
@@ -208,10 +209,10 @@ const Todo = ({ route }) => {
                                     targettedTime = '0' + targettedTime
                                 if (targettedTime.substring(3).length != 2)
                                     targettedTime = targettedTime.substring(0, 2) + ":" + "0" + targettedTime[3]
-                                // console.log("Time", targettedTime);
+
                                 if (currentTime > targettedTime && date == currentDate) {
                                     val[4] = "Done"
-                                    // console.log("Done", val)
+
                                     Time = val[0]
                                     TaskTitle = val[1]
                                     Task_Description = val[2]
@@ -220,15 +221,15 @@ const Todo = ({ route }) => {
                                     TaskDetails = []
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                                    AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
-                                    // console.log("DL", DoneList);
+                                    AsyncStorage.setItem(date, JSON.stringify(RemainingList));
+
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
                                     setCount(count - 1);
                                 }
                                 else if (val[0] <= currentTime && currentTime < targettedTime && date == currentDate) {
                                     val[4] = "In Progress"
-                                    // console.log("In Prog", val)
+
                                     Time = val[0]
                                     TaskTitle = val[1]
                                     Task_Description = val[2]
@@ -242,15 +243,15 @@ const Todo = ({ route }) => {
                                     items += 1;
                                     return <TouchableOpacity key={`#${Math.random()}`} onPress={() => { setStateDetails(true); valuesets = []; setDatas(val); items -= 1 }}>
                                         <View style={{ marginTop: 20, marginBottom: -10, ...styles.todoHeader }}>
-                                            <Text key={Math.random()} style={{ paddingTop: 12, ...styles.slno }}>#{items}</Text>
+                                            <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, ...styles.slno }}>#{items}</Text>
 
-                                            <Text key={Math.random()} style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[0]}</Text>
+                                            <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[0]}</Text>
 
-                                            <Text key={Math.random()} style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[1]}</Text>
+                                            <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[1]}</Text>
 
-                                            <Text key={Math.random()} style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[3]}</Text>
+                                            <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[3]}</Text>
 
-                                            <Text key={Math.random()} style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[5]}</Text>
+                                            <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[5]}</Text>
                                         </View>
                                     </TouchableOpacity>
                                 }
@@ -262,7 +263,7 @@ const Todo = ({ route }) => {
                 </ScrollView>
                 <TouchableOpacity onPress={() => { let c = 0; AllDetails.forEach(res => c += 1); AllDet.forEach(res => c += 1); if (c != 0) setStateModal(true); else { let userD = userDate.filter(item => item != date); AsyncStorage.setItem("Date", JSON.stringify(userD)) } }}>
                     <View style={styles.addIcon}>
-                        <AntDesign name='plus' size={40} color='#000000' />
+                        <AntDesign name='plus' size={windowWidth / 10.2857} color='#000000' />
                     </View>
                 </TouchableOpacity>
                 <Modal
@@ -285,8 +286,8 @@ const Todo = ({ route }) => {
                             <TextInput style={styles.ModalText} placeholder='Enter Priority High|Medium|Low.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Priority = val }} />
 
 
-                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && isNaN(val) == false) Target = parseInt(val); else Alert.alert("Error!", "Enter valid target entries format in hours") }} />
-                            <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseInt(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
+                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) Target = parseFloat(val); else Alert.alert("Error!", "Enter valid target entries format in hours") }} />
+                            <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseFloat(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
                         </ScrollView>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity onPress={() => saveTodo("Todo")}>
@@ -311,7 +312,7 @@ const Todo = ({ route }) => {
                 <View style={styles.detailsPane}>
                     <TouchableOpacity onPress={() => { setStateDetails(false) }}>
                         <View style={styles.cross}>
-                            <Entypo name="cross" size={30}
+                            <Entypo name="cross" size={windowWidth / 13.714}
                                 color="red" />
                         </View>
                         <TouchableOpacity onPress={() => {
@@ -334,10 +335,10 @@ const Todo = ({ route }) => {
                                         setStateDetails(true)
                                 }
                             );
-                            // setStateDetails(false); valuesets = []; console.log(keyPressed); var _ = AllDetails.splice(keyPressed, 1); console.log("Val Received", _); AsyncStorage.setItem(date, JSON.stringify(AllDetails)); setCount(count - 1); items -= 1;
+
                         }}>
                             <View style={styles.trash}>
-                                <MaterialCommunityIcons name="trash-can-outline" size={30}
+                                <MaterialCommunityIcons name="trash-can-outline" size={windowWidth / 13.714}
                                     color="red" />
                             </View>
                         </TouchableOpacity>
@@ -356,14 +357,14 @@ const Todo = ({ route }) => {
                     </View>
                 </View>
             </Modal>
-            <View style={{ height: 50, position: 'relative', marginTop: windowHeight / 1.9, marginHorizontal: 5 }}>
+            <View style={{ height: windowHeight / 17.05, position: 'relative', marginTop: windowHeight / 1.97, marginHorizontal: 5 }}>
                 <TouchableOpacity onPress={removeTodo}>
                     <View style={styles.buttonViewDone}>
                         <Text style={styles.buttonDoneText}>
                             Remove All Todo
                         </Text>
                         <View style={styles.removeAllIcon}>
-                            <MaterialCommunityIcons name='clock-remove-outline' size={30} color='#03CAD9' />
+                            <MaterialCommunityIcons name='clock-remove-outline' size={windowWidth / 13.714} color='#03CAD9' />
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -374,10 +375,10 @@ const Todo = ({ route }) => {
 const styles = StyleSheet.create({
     headInner: {
         position: 'relative',
-        width: 220,
-        height: 220,
-        borderRadius: 110,
-        marginTop: -230,
+        width: windowWidth / 1.785,
+        height: windowHeight / 3.59,
+        borderRadius: windowWidth / 3.4,
+        marginTop: -windowHeight / 3.45,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -387,10 +388,10 @@ const styles = StyleSheet.create({
     },
     headMid: {
         position: 'relative',
-        width: 240,
-        height: 240,
-        borderRadius: 120,
-        marginTop: -250,
+        width: windowWidth / 1.6363,
+        height: windowHeight / 3.29,
+        borderRadius: windowWidth / 3.2,
+        marginTop: -windowHeight / 3.17,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -400,10 +401,10 @@ const styles = StyleSheet.create({
     },
     headOuter: {
         position: 'relative',
-        width: 260,
-        height: 260,
-        borderRadius: 130,
-        marginTop: 20,
+        width: windowWidth / 1.522,
+        height: windowHeight / 3.04,
+        borderRadius: windowWidth / 3.044,
+        marginTop: windowHeight / 39.56,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -434,16 +435,16 @@ const styles = StyleSheet.create({
         fontFamily: 'serif',
         fontWeight: 'bold',
         fontSize: 25,
-        marginLeft: 10,
-        padding: 10
+        marginLeft: windowWidth / 41.42,
+        padding: windowWidth / 41.42
     },
     addIcon: {
-        width: 55,
-        height: 56,
-        borderRadius: 22.5,
+        width: windowWidth / 7.480,
+        height: windowHeight / 15.2244,
+        borderRadius: windowHeight / 37.81,
         backgroundColor: '#03CAD9',
         position: 'absolute',
-        marginTop: -26,
+        marginTop: -windowHeight / 32.79,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'
@@ -451,45 +452,43 @@ const styles = StyleSheet.create({
     headerDivider: {
         borderBottomColor: 'white',
         borderBottomWidth: 0.4,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 40
+        marginLeft: windowWidth / 20.57,
+        marginRight: windowWidth / 20.57,
+        marginBottom: windowWidth / 10.289
     },
     Count: {
-        width: 80,
-        height: 25,
+        width: windowWidth / 5.184,
+        height: windowHeight / 34.10,
         borderRadius: 30,
         backgroundColor: '#03CAD9',
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginLeft: 190
+        marginLeft: windowWidth / 2.1654
     },
     todoHeader: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         flex: 1,
         flexDirection: 'row',
-        marginLeft: 70
+        marginLeft: windowWidth / 5.877
     },
     todoHeaderTitles: {
-        // marginLeft: 50,
-        // backgroundColor: 'red',
-        width: 70,
-        maxWidth: 70,
+        width: windowWidth / 5.8775,
+        maxWidth: windowWidth / 5.8775,
         maxHeight: windowHeight / 25,
         position: 'relative',
         color: 'white',
-        paddingLeft: 16,
-        paddingBottom: 0.9,
-        marginTop: -40,
-        marginBottom: 30,
-        marginRight: 8
+        paddingLeft: windowWidth / 25.71,
+        paddingBottom: windowWidth / 457.14,
+        marginTop: -windowHeight / 21.314,
+        marginBottom: windowHeight / 21.4890,
+        marginRight: windowWidth / 51.42
     },
     ModalText: {
         color: 'white',
         fontSize: 20,
-        padding: 20
+        padding: windowHeight / 42.62
     },
     ModalTextView: {
         elevation: 30,
@@ -508,15 +507,15 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: '#1A364F',
         elevation: 100,
-        margin: 20,
-        marginTop: 80
+        margin: windowHeight / 42.62,
+        marginTop: windowHeight / 20.65
     },
     buttonModal: {
         elevation: 40,
         borderRadius: 18,
         borderWidth: 1,
         borderColor: "#03CAD9",
-        marginLeft: 6,
+        marginLeft: windowHeight / 68.5714,
         paddingVertical: windowWidth / 21,
         paddingHorizontal: windowHeight / 17.96,
         justifyContent: 'space-evenly',
@@ -525,13 +524,13 @@ const styles = StyleSheet.create({
     slno: {
         color: '#03CAD9',
         position: 'relative',
-        marginLeft: -17,
-        marginBottom: 30,
-        marginTop: -39,
+        marginLeft: -windowWidth / 24.20,
+        marginBottom: windowHeight / 28.419,
+        marginTop: -windowHeight / 21.860,
     },
     scrollviewTodo: {
         minHeight: 0,
-        maxHeight: 50,
+        maxHeight: windowHeight / 17.05,
         padding: 2
     },
     detailsPane: {
@@ -540,7 +539,7 @@ const styles = StyleSheet.create({
         width: windowWidth / 1.2,
         alignSelf: 'center',
         justifyContent: 'center',
-        paddingLeft: 20,
+        paddingLeft: windowWidth / 20.57,
         backgroundColor: '#124267',
         height: windowHeight / 3,
         borderRadius: 20,
@@ -554,13 +553,13 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     trash: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         position: 'relative',
         marginLeft: windowWidth / 1.5,
         marginTop: -windowHeight / 50
     },
     cross: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         position: 'relative',
         marginLeft: windowWidth / 1.5,
         marginTop: -windowHeight / 270
@@ -577,10 +576,10 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         borderWidth: 1.5,
         borderColor: "#03CAD9",
-        paddingVertical: 9,
+        paddingVertical: windowHeight / 94.73,
         paddingHorizontal: windowWidth / 4.5,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     buttonDoneText: {
         shadowRadius: 20,
@@ -596,8 +595,8 @@ const styles = StyleSheet.create({
     },
     removeAllIcon: {
         marginLeft: windowWidth / 3.5,
-        marginRight: -90,
-        // paddingRight: 20
+        marginRight: -windowWidth / 4.5714,
+
     }
 });
 export default Todo;

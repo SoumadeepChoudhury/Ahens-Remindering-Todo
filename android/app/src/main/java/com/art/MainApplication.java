@@ -18,6 +18,11 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
         @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
+        }
+        
+        @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
@@ -28,14 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          packages.add(new ReactNativePushNotificationPackage());
+          // packages.add(new ReactNativePushNotificationPackage());
           return packages;
         }
         
-        @Override
-        protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
-        }
 
         @Override
         protected String getJSMainModuleName() {

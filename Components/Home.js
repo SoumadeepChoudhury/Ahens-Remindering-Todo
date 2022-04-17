@@ -247,9 +247,9 @@ const Home = ({ navigation }) => {
                             <TextInput style={styles.ModalText} placeholder='Enter Status Todo|In Progress|Done.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Status = String(val) }} />
 
 
-                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) Target = parseInt(val); else Alert.alert("Error!", "Enter valid target entries format in HH") }} />
+                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) Target = parseFloat(val); else Alert.alert("Error!", "Enter valid target entries format in HH") }} />
 
-                            <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseInt(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
+                            <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseFloat(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
                         </ScrollView>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity onPress={() => { saveTodo() }}>
@@ -297,8 +297,8 @@ const styles = StyleSheet.create({
         elevation: 40,
         borderRadius: 29,
         marginBottom: -24,
-        paddingVertical: 13,
-        paddingHorizontal: 100,
+        paddingVertical: windowHeight / 57,
+        paddingHorizontal: windowWidth / 4,
         backgroundColor: '#03CAD9',
     },
     buttonModal: {
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         borderWidth: 2,
         borderColor: "#03CAD9",
-        paddingVertical: 15,
+        paddingVertical: windowHeight / 65,
         paddingHorizontal: windowWidth / 4.5,
         alignItems: 'center'
     },
@@ -375,8 +375,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     addIcon: {
-        marginLeft: 80,
-        marginRight: -90,
+        marginLeft: windowWidth / 5,
+        marginRight: -windowWidth / 4.5,
         // paddingRight: 20
     }
 });

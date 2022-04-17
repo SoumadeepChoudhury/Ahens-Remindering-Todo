@@ -140,7 +140,7 @@ const Progress = ({ route }) => {
                                     TaskDetails = []
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                                    AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
+                                    AsyncStorage.setItem(date, JSON.stringify(RemainingList));
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
                                     setCount(count - 1);
@@ -210,51 +210,7 @@ const Progress = ({ route }) => {
                         </View>
                     </Modal>
                 </ScrollView>
-                {/* <TouchableOpacity onPress={() => { setStateModal(true) }}>
-                    <View style={styles.addIcon}>
-                        <AntDesign name='plus' size={40} color='#000000' />
-                    </View>
-                </TouchableOpacity> */}
-                {/* <Modal
-                    transparent={true}
-                    visible={stateModal}>
-                    <View
-                        style={styles.Modal}>
 
-                        <ScrollView>
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Time in HH:MM.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && val.charAt(2) == ':' && val.length == 5) { Time = val } }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Task Title.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { TaskTitle = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Task Description.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Task_Description = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Priority.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Priority = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Target = val }} />
-                        </ScrollView>
-                        <View style={{ flexDirection: "row" }}>
-                            <TouchableOpacity onPress={saveTodo}>
-                                <View style={styles.buttonModal}>
-                                    <Text style={styles.ModalTextView}>
-                                        {"\t"}Save{"\t"}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setStateModal(false)}>
-                                <View style={styles.buttonModal}>
-                                    <Text style={styles.ModalTextView}>
-                                        Cancel
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal> */}
             </View>
         </SafeAreaView>
     );
@@ -262,10 +218,10 @@ const Progress = ({ route }) => {
 const styles = StyleSheet.create({
     headInner: {
         position: 'relative',
-        width: 220,
-        height: 220,
-        borderRadius: 110,
-        marginTop: -230,
+        width: windowWidth / 1.785,
+        height: windowHeight / 3.59,
+        borderRadius: windowWidth / 3.4,
+        marginTop: -windowHeight / 3.45,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -275,10 +231,10 @@ const styles = StyleSheet.create({
     },
     headMid: {
         position: 'relative',
-        width: 240,
-        height: 240,
-        borderRadius: 120,
-        marginTop: -250,
+        width: windowWidth / 1.6363,
+        height: windowHeight / 3.29,
+        borderRadius: windowWidth / 3.2,
+        marginTop: -windowHeight / 3.17,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -288,10 +244,10 @@ const styles = StyleSheet.create({
     },
     headOuter: {
         position: 'relative',
-        width: 260,
-        height: 260,
-        borderRadius: 130,
-        marginTop: 20,
+        width: windowWidth / 1.522,
+        height: windowHeight / 3.04,
+        borderRadius: windowWidth / 3.044,
+        marginTop: windowHeight / 39.56,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -322,103 +278,91 @@ const styles = StyleSheet.create({
         fontFamily: 'serif',
         fontWeight: 'bold',
         fontSize: 25,
-        marginLeft: 10,
-        padding: 10
-    },
-    addIcon: {
-        width: 55,
-        height: 56,
-        borderRadius: 22.5,
-        backgroundColor: '#03CAD9',
-        position: 'absolute',
-        marginTop: -26,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center'
+        marginLeft: windowWidth / 41.42,
+        padding: windowWidth / 41.42
     },
     headerDivider: {
         borderBottomColor: 'white',
         borderBottomWidth: 0.4,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 40
+        marginLeft: windowWidth / 20.57,
+        marginRight: windowWidth / 20.57,
+        marginBottom: windowWidth / 10.289
     },
     Count: {
-        width: 80,
-        height: 25,
+        width: windowWidth / 5.184,
+        height: windowHeight / 34.10,
         borderRadius: 30,
         backgroundColor: '#03CAD9',
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginLeft: 100
+        marginLeft: windowWidth / 3.5
     },
     todoHeader: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         flex: 1,
         flexDirection: 'row',
-        marginLeft: 70
+        marginLeft: windowWidth / 5.877
     },
     todoHeaderTitles: {
-        // marginLeft: 50,
-        width: 70,
-        maxWidth: 70,
+        width: windowWidth / 5.8775,
+        maxWidth: windowWidth / 5.8775,
         maxHeight: windowHeight / 25,
         position: 'relative',
         color: 'white',
-        paddingLeft: 16,
-        paddingBottom: 0.9,
-        marginTop: -40,
-        marginBottom: 30,
-        marginRight: 8
+        paddingLeft: windowWidth / 25.71,
+        paddingBottom: windowWidth / 457.14,
+        marginTop: -windowHeight / 21.314,
+        marginBottom: windowHeight / 21.4890,
+        marginRight: windowWidth / 51.42
     },
-    ModalText: {
-        color: 'white',
-        fontSize: 20,
-        padding: 20
-    },
-    ModalTextView: {
-        elevation: 30,
-        color: '#03CAD9',
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-        fontFamily: 'serif',
-        textTransform: 'uppercase',
-        fontSize: windowHeight / 39.96,
-        textAlign: 'center',
-    },
-    Modal: {
-        shadowOpacity: 20,
-        borderWidth: 2,
-        backgroundColor: '#124267',
-        borderRadius: 20,
-        borderColor: '#1A364F',
-        elevation: 100,
-        margin: 20,
-        marginTop: 80
-    },
-    buttonModal: {
-        elevation: 40,
-        borderRadius: 18,
-        borderWidth: 1,
-        borderColor: "#03CAD9",
-        marginLeft: 6,
-        paddingVertical: windowWidth / 21,
-        paddingHorizontal: windowHeight / 17.96,
-        justifyContent: 'space-evenly',
-        alignItems: 'center'
-    },
+    // ModalText: {
+    //     color: 'white',
+    //     fontSize: 20,
+    //     padding: 20
+    // },
+    // ModalTextView: {
+    //     elevation: 30,
+    //     color: '#03CAD9',
+    //     fontWeight: 'bold',
+    //     fontStyle: 'normal',
+    //     fontFamily: 'serif',
+    //     textTransform: 'uppercase',
+    //     fontSize: windowHeight / 39.96,
+    //     textAlign: 'center',
+    // },
+    // Modal: {
+    //     shadowOpacity: 20,
+    //     borderWidth: 2,
+    //     backgroundColor: '#124267',
+    //     borderRadius: 20,
+    //     borderColor: '#1A364F',
+    //     elevation: 100,
+    //     margin: 20,
+    //     marginTop: 80
+    // },
+    // buttonModal: {
+    //     elevation: 40,
+    //     borderRadius: 18,
+    //     borderWidth: 1,
+    //     borderColor: "#03CAD9",
+    //     marginLeft: 6,
+    //     paddingVertical: windowWidth / 21,
+    //     paddingHorizontal: windowHeight / 17.96,
+    //     justifyContent: 'space-evenly',
+    //     alignItems: 'center'
+    // },
     slno: {
         color: '#03CAD9',
         position: 'relative',
-        marginLeft: -17,
-        marginBottom: 30,
-        marginTop: -39,
+        marginLeft: -windowWidth / 24.20,
+        marginBottom: windowHeight / 28.419,
+        marginTop: -windowHeight / 21.860,
     },
     scrollviewTodo: {
         minHeight: 0,
-        maxHeight: 50,
+        maxHeight: windowHeight / 17.05,
         padding: 2
     },
     detailsPane: {
@@ -427,7 +371,7 @@ const styles = StyleSheet.create({
         width: windowWidth / 1.2,
         alignSelf: 'center',
         justifyContent: 'center',
-        paddingLeft: 20,
+        paddingLeft: windowWidth / 20.57,
         backgroundColor: '#124267',
         height: windowHeight / 3,
         borderRadius: 20,
@@ -441,13 +385,13 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     trash: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         position: 'relative',
         marginLeft: windowWidth / 1.5,
         marginTop: -windowHeight / 50
     },
     cross: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         position: 'relative',
         marginLeft: windowWidth / 1.5,
         marginTop: -windowHeight / 270

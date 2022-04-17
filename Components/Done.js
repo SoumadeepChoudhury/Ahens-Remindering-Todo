@@ -35,7 +35,7 @@ const Done = ({ route }) => {
         ("Finally", Done);
         return Done
     };
-    const [DoneDetails, setDoneDetails] = useState(async () => [await AsyncStorage.getItem(`${date == "All" ? "Done" : String(date).concat("Done")}`).then((val) => { setDoneDetails(getItems(val)); setCount(getItems(val).length); })]);
+    const [DoneDetails, setDoneDetails] = useState(async () => [await AsyncStorage.getItem(`${date == "All" ? "Done" : String(date)}`).then((val) => { setDoneDetails(getItems(val)); setCount(getItems(val).length); })]);
     const [count, setCount] = useState(0);
     var items = 0;
     var donelist = DoneDetails;
@@ -113,10 +113,10 @@ const Done = ({ route }) => {
 const styles = StyleSheet.create({
     headInner: {
         position: 'relative',
-        width: 220,
-        height: 220,
-        borderRadius: 110,
-        marginTop: -230,
+        width: windowWidth / 1.785,
+        height: windowHeight / 3.59,
+        borderRadius: windowWidth / 3.4,
+        marginTop: -windowHeight / 3.45,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -126,10 +126,10 @@ const styles = StyleSheet.create({
     },
     headMid: {
         position: 'relative',
-        width: 240,
-        height: 240,
-        borderRadius: 120,
-        marginTop: -250,
+        width: windowWidth / 1.6363,
+        height: windowHeight / 3.29,
+        borderRadius: windowWidth / 3.2,
+        marginTop: -windowHeight / 3.17,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -139,10 +139,10 @@ const styles = StyleSheet.create({
     },
     headOuter: {
         position: 'relative',
-        width: 260,
-        height: 260,
-        borderRadius: 130,
-        marginTop: 20,
+        width: windowWidth / 1.522,
+        height: windowHeight / 3.04,
+        borderRadius: windowWidth / 3.044,
+        marginTop: windowHeight / 39.56,
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontStyle: 'italic',
         fontFamily: 'serif'
-    }, todoView: {
+    },
+    todoView: {
         position: 'absolute',
         flex: 1,
         backgroundColor: '#124267',
@@ -172,16 +173,16 @@ const styles = StyleSheet.create({
         fontFamily: 'serif',
         fontWeight: 'bold',
         fontSize: 25,
-        marginLeft: 10,
-        padding: 10
+        marginLeft: windowWidth / 41.42,
+        padding: windowWidth / 41.42
     },
     addIcon: {
-        width: 55,
-        height: 56,
-        borderRadius: 22.5,
+        width: windowWidth / 7.480,
+        height: windowHeight / 15.2244,
+        borderRadius: windowHeight / 37.81,
         backgroundColor: '#03CAD9',
         position: 'absolute',
-        marginTop: -26,
+        marginTop: -windowHeight / 32.79,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'
@@ -189,46 +190,45 @@ const styles = StyleSheet.create({
     headerDivider: {
         borderBottomColor: 'white',
         borderBottomWidth: 0.4,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 40
+        marginLeft: windowWidth / 20.57,
+        marginRight: windowWidth / 20.57,
+        marginBottom: windowWidth / 10.289
     },
     Count: {
-        width: 80,
-        height: 25,
+        width: windowWidth / 5.184,
+        height: windowHeight / 34.10,
         borderRadius: 30,
         backgroundColor: '#03CAD9',
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginLeft: 180
+        marginLeft: windowWidth / 2.1654
     },
     todoHeader: {
-        paddingTop: 10,
+        paddingTop: windowHeight / 85.257,
         flex: 1,
         flexDirection: 'row',
-        marginLeft: 70
+        marginLeft: windowWidth / 5.877
     },
     todoHeaderTitles: {
-        // marginLeft: 50,
-        width: 70,
-        maxWidth: 70,
+        width: windowWidth / 5.8775,
+        maxWidth: windowWidth / 5.8775,
         maxHeight: windowHeight / 25,
         position: 'relative',
         color: 'white',
-        paddingLeft: 16,
-        paddingBottom: 0.9,
-        marginTop: -40,
-        marginBottom: 30,
-        marginRight: 8
+        paddingLeft: windowWidth / 25.71,
+        paddingBottom: windowWidth / 457.14,
+        marginTop: -windowHeight / 21.314,
+        marginBottom: windowHeight / 21.4890,
+        marginRight: windowWidth / 51.42
     },
     slno: {
         color: '#03CAD9',
         position: 'relative',
-        marginLeft: -17,
-        marginBottom: 30,
-        marginTop: -39,
+        marginLeft: -windowWidth / 24.20,
+        marginBottom: windowHeight / 28.419,
+        marginTop: -windowHeight / 21.860,
     },
 });
 export default Done;
