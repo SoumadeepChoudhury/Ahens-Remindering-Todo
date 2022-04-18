@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         borderWidth: 2,
         borderColor: "#03CAD9",
-        paddingVertical: windowHeight / 65,
+        paddingVertical: windowHeight / 70,
         paddingHorizontal: windowWidth / 4.5,
         alignItems: 'center'
     },
