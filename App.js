@@ -6,7 +6,7 @@ import DetailsView from './Components/DetailsView';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import codePush from 'react-native-code-push';
-let codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
 const App = () => {
   const Stack = createNativeStackNavigator();
