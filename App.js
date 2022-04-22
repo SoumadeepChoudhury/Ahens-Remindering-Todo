@@ -5,17 +5,11 @@ import Done from './Components/Done';
 import DetailsView from './Components/DetailsView';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import codePush from 'react-native-code-push';
-let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
 const App = () => {
   const Stack = createNativeStackNavigator();
   useEffect(() => {
     RNBootSplash.hide(); // fade
-    codePush.sync({
-      updateDialog: true,
-      installMode: codePush.InstallMode.IMMEDIATE
-    });
   }, []);
   return (
     <NavigationContainer>
@@ -28,4 +22,4 @@ const App = () => {
   );
 }
 
-export default codePush(codePushOptions)(App);;
+export default App;;

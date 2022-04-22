@@ -4,6 +4,8 @@ import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import PushNotification, { Importance } from 'react-native-push-notification';
+import codePush from 'react-native-code-push';
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START };
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -24,6 +26,10 @@ today = String(yyyy + '-' + mm + '-' + dd);
 var runs = 0
 const Home = ({ navigation }) => {
     useEffect(() => {
+        codePush.sync({
+            updateDialog: true,
+            installMode: codePush.InstallMode.IMMEDIATE
+        });
         createChannel();
     }, [])
     const createChannel = () => {
@@ -384,4 +390,4 @@ const styles = StyleSheet.create({
         // paddingRight: 20
     }
 });
-export default Home;
+export default codePush(codePushOptions)(Home);
