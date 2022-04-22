@@ -151,125 +151,127 @@ const Home = ({ navigation }) => {
     return (
         <>
             <StatusBar hidden={true} />
-            <SafeAreaView style={{ backgroundColor: '#124267', height: windowHeight, width: windowWidth, paddingTop: windowHeight / 39.96 }}>
-                <View>
-                    <View style={{ marginTop: 10, elevation: 20, borderColor: '#124267' }}>
-                        <Calendar
-                            theme={{
-                                elevation: windowHeight / 395.635,
-                                backgroundColor: '#124267',
-                                calendarBackground: '#124267',
-                                textSectionTitleColor: '#b6c1cd',
-                                textSectionTitleDisabledColor: '#000000',
-                                selectedDayBackgroundColor: '#00adf5',
-                                selectedDayTextColor: '#ffffff',
-                                todayTextColor: '#03CAD9',
-                                dayTextColor: 'white',
-                                textDisabledColor: 'grey',
-                                dotColor: '#00adf5',
-                                selectedDotColor: '#ffffff',
-                                arrowColor: 'white',
-                                disabledArrowColor: '#d9e1e8',
-                                monthTextColor: 'white',
-                                indicatorColor: 'blue',
-                                textDayFontFamily: 'monospace',
-                                textMonthFontFamily: 'monospace',
-                                textDayHeaderFontFamily: 'monospace',
-                                textDayFontWeight: '300',
-                                textMonthFontWeight: 'bold',
-                                textDayHeaderFontWeight: '300',
-                                textDayFontSize: windowHeight / 49.45,
-                                textMonthFontSize: windowHeight / 49.45,
-                                textDayHeaderFontSize: windowHeight / 49.45
-                            }}
-                            minDate={yyyy + '-' + mm + '-' + dd}
-                            disableAllTouchEventsForDisabledDays={true}
-                            enableSwipeMonths
-                            onDayPress={day => {
-                                navigation.navigate('Details', {
-                                    date: day.dateString
-                                });
-                            }}
-                            markedDates={dates}
-                        />
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate('Done', {
-                            date: "All"
-                        });
-                    }}>
-                        <View style={styles.buttonViewDone}>
-                            <Text style={styles.buttonDoneText}>
-                                View Completed Tasks
-                            </Text>
-                            <View style={styles.addIcon}>
-                                <AntDesign name='arrowright' size={30} color='#03CAD9' />
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View >
-                <View style={styles.footer}>
-                    <TouchableOpacity onPress={() => { setStateModal(true) }}>
-                        <View style={styles.button}>
-                            <Text style={styles.buttonText}>
-                                Add TODO
-                            </Text>
-                            <View style={styles.addIcon}>
-                                <AntDesign name='pluscircleo' size={30} color='#303D3E' />
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View >
-                <Modal
-                    transparent={true}
-                    visible={stateModal}>
-                    <View
-                        style={styles.Modal}>
-
-                        <ScrollView>
-                            <TextInput style={styles.ModalText} placeholder='Enter Date in YYYY-MM-DD.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val.length == 10 && val.charAt(4) == '-' && val.charAt(7) == '-') { date = String(val) } }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Time in HH:MM.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && val.charAt(2) == ':' && val.length == 5) { Time = val } }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Task Title.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { TaskTitle = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Task Description.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Task_Description = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Priority High|Medium|Low.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Priority = val }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Status Todo|In Progress|Done.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Status = String(val) }} />
-
-
-                            <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) Target = parseFloat(val); else Alert.alert("Error!", "Enter valid target entries format in HH") }} />
-
-                            <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseFloat(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
-                        </ScrollView>
-                        <View style={{ flexDirection: "row" }}>
-                            <TouchableOpacity onPress={() => { saveTodo() }}>
-                                <View style={styles.buttonModal}>
-                                    <Text style={styles.ModalTextView}>
-                                        {"\t"}Save{"\t"}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setStateModal(false)}>
-                                <View style={styles.buttonModal}>
-                                    <Text style={styles.ModalTextView}>
-                                        Cancel
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+            <View style={{ backgroundColor: '#124267' }}>
+                <SafeAreaView style={{ height: windowHeight, width: windowWidth, paddingTop: windowHeight / 39.96 }}>
+                    <View>
+                        <View style={{ marginTop: 10, elevation: 20, borderColor: '#124267' }}>
+                            <Calendar
+                                theme={{
+                                    elevation: windowHeight / 395.635,
+                                    backgroundColor: '#124267',
+                                    calendarBackground: '#124267',
+                                    textSectionTitleColor: '#b6c1cd',
+                                    textSectionTitleDisabledColor: '#000000',
+                                    selectedDayBackgroundColor: '#00adf5',
+                                    selectedDayTextColor: '#ffffff',
+                                    todayTextColor: '#03CAD9',
+                                    dayTextColor: 'white',
+                                    textDisabledColor: 'grey',
+                                    dotColor: '#00adf5',
+                                    selectedDotColor: '#ffffff',
+                                    arrowColor: 'white',
+                                    disabledArrowColor: '#d9e1e8',
+                                    monthTextColor: 'white',
+                                    indicatorColor: 'blue',
+                                    textDayFontFamily: 'monospace',
+                                    textMonthFontFamily: 'monospace',
+                                    textDayHeaderFontFamily: 'monospace',
+                                    textDayFontWeight: '300',
+                                    textMonthFontWeight: 'bold',
+                                    textDayHeaderFontWeight: '300',
+                                    textDayFontSize: windowHeight / 49.45,
+                                    textMonthFontSize: windowHeight / 49.45,
+                                    textDayHeaderFontSize: windowHeight / 49.45
+                                }}
+                                minDate={yyyy + '-' + mm + '-' + dd}
+                                disableAllTouchEventsForDisabledDays={true}
+                                enableSwipeMonths
+                                onDayPress={day => {
+                                    navigation.navigate('Details', {
+                                        date: day.dateString
+                                    });
+                                }}
+                                markedDates={dates}
+                            />
                         </View>
                     </View>
-                </Modal>
-            </SafeAreaView >
+                    <View style={styles.footer}>
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate('Done', {
+                                date: "All"
+                            });
+                        }}>
+                            <View style={styles.buttonViewDone}>
+                                <Text style={styles.buttonDoneText}>
+                                    View Completed Tasks
+                                </Text>
+                                <View style={styles.addIcon}>
+                                    <AntDesign name='arrowright' size={30} color='#03CAD9' />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View >
+                    <View style={styles.footer}>
+                        <TouchableOpacity onPress={() => { setStateModal(true) }}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>
+                                    Add TODO
+                                </Text>
+                                <View style={styles.addIcon}>
+                                    <AntDesign name='pluscircleo' size={30} color='#303D3E' />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View >
+                    <Modal
+                        transparent={true}
+                        visible={stateModal}>
+                        <View
+                            style={styles.Modal}>
+
+                            <ScrollView>
+                                <TextInput style={styles.ModalText} placeholder='Enter Date in YYYY-MM-DD.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val.length == 10 && val.charAt(4) == '-' && val.charAt(7) == '-') { date = String(val) } }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Time in HH:MM.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if (val != '' && val.charAt(2) == ':' && val.length == 5) { Time = val } }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Task Title.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { TaskTitle = val }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Task Description.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Task_Description = val }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Priority High|Medium|Low.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Priority = val }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Status Todo|In Progress|Done.....' placeholderTextColor="#8DB6D9" onChangeText={(val) => { Status = String(val) }} />
+
+
+                                <TextInput style={styles.ModalText} placeholder='Enter Target of Completion in HH.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) Target = parseFloat(val); else Alert.alert("Error!", "Enter valid target entries format in HH") }} />
+
+                                <TextInput style={styles.ModalText} placeholder='Remind me before in Min.....' keyboardType='numeric' placeholderTextColor="#8DB6D9" onChangeText={(val) => { if ((val != '' || val != ' ') && isNaN(val) == false) remind = parseFloat(val); else Alert.alert("Error!", "Enter valid reminder format in Min ") }} />
+                            </ScrollView>
+                            <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
+                                <TouchableOpacity onPress={() => { saveTodo() }}>
+                                    <View style={styles.buttonModal}>
+                                        <Text style={styles.ModalTextView}>
+                                            {"\t"}Save{"\t"}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => setStateModal(false)}>
+                                    <View style={styles.buttonModal}>
+                                        <Text style={styles.ModalTextView}>
+                                            Cancel
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
+                </SafeAreaView >
+            </View>
         </>
     );
 };
@@ -306,10 +308,10 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         borderWidth: 1,
         borderColor: "#03CAD9",
-        marginLeft: 6,
+        marginLeft: windowWidth / 90,
         paddingVertical: windowWidth / 21,
-        paddingHorizontal: windowHeight / 17.96,
-        justifyContent: 'space-evenly',
+        paddingHorizontal: windowHeight / 23,
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     buttonText: {
@@ -321,32 +323,34 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontSize: windowHeight / 39.96,
         textAlign: 'center',
-        marginLeft: 30
+        marginHorizontal: windowWidth / 28
     },
     ModalText: {
         color: 'white',
-        fontSize: 20,
-        padding: 20
+        fontSize: windowWidth / 20,
+        padding: windowWidth / 20
     },
     ModalTextView: {
         elevation: 30,
+        maxWidth: '100%',
         color: '#03CAD9',
         fontWeight: 'bold',
         fontStyle: 'normal',
         fontFamily: 'serif',
         textTransform: 'uppercase',
-        fontSize: windowHeight / 39.96,
-        textAlign: 'center',
+        fontSize: windowHeight / 44,
+        textAlign: 'center'
     },
     Modal: {
+        overflow: 'hidden',
         shadowOpacity: 20,
         borderWidth: 2,
         backgroundColor: '#124267',
         borderRadius: 20,
         borderColor: '#1A364F',
         elevation: 100,
-        margin: 20,
-        marginTop: 80
+        margin: windowHeight / 42.62,
+        marginTop: windowHeight / 20.65
     },
     buttonViewDone: {
         flex: 1,
@@ -370,8 +374,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'italic',
         fontFamily: 'serif',
-        fontSize: 15,
-        marginRight: -15,
+        fontSize: windowWidth / 25.9,
+        marginRight: -windowWidth / 25.9,
         textAlign: 'center',
     },
     addIcon: {

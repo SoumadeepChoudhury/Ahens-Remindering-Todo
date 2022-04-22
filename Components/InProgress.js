@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions, Modal } from 'react-native';
+import { View, ScrollView, Text, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions, Modal, Alert } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -131,27 +131,22 @@ const Progress = ({ route }) => {
                                 if (currentTime > targettedTime && date == currentDate) {
 
                                     val[4] = "Done"
-                                    Time = val[0]
-                                    TaskTitle = val[1]
-                                    Task_Description = val[2]
-                                    Priority = val[3]
-                                    Target = val[5]
                                     TaskDetails = []
+                                    setCount(count - 1);
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
-                                    setCount(count - 1);
                                 }
                                 else
                                     return <TouchableOpacity key={items} onPress={() => { setStateDetails(true); valuesets = []; setDatas(val); items -= 1 }}>
-                                        <View style={{ marginTop: 20, marginBottom: -10, ...styles.todoHeader }}>
-                                            <Text style={{ paddingTop: 12, ...styles.slno }}>#{items}</Text>
-                                            <Text style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[0]}</Text>
-                                            <Text style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[1]}</Text>
-                                            <Text style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[3]}</Text>
-                                            <Text style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[5]}</Text>
+                                        <View style={{ marginTop: windowHeight / 35, marginBottom: -windowHeight / 60, ...styles.todoHeader }}>
+                                            <Text style={{ paddingTop: windowHeight / 142.09, ...styles.slno }}>#{items}</Text>
+                                            <Text style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[0]}</Text>
+                                            <Text style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[1]}</Text>
+                                            <Text style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[3]}</Text>
+                                            <Text style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[5]}</Text>
                                         </View>
                                     </TouchableOpacity>
                             }
@@ -256,7 +251,7 @@ const styles = StyleSheet.create({
     },
     headText: {
         color: '#03CAD9',
-        fontSize: 30,
+        fontSize: windowWidth / 15,
         fontStyle: 'italic',
         fontFamily: 'serif'
     },
@@ -265,9 +260,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#124267',
         width: windowWidth,
-        minHeight: 60,
+        minHeight: windowHeight / 6,
         maxHeight: windowHeight / 2.25,
-        marginTop: 310,
+        marginTop: windowHeight / 2.5,
         marginBottom: 90,
         borderRadius: 12,
         elevation: 40
@@ -276,7 +271,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'serif',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: windowWidth / 15,
         marginLeft: windowWidth / 41.42,
         padding: windowWidth / 41.42
     },

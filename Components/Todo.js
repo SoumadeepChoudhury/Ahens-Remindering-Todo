@@ -81,8 +81,6 @@ const Todo = ({ route }) => {
     const [userDate, setUserDate] = useState(async () => [await AsyncStorage.getItem("Date").then((val) => { setUserDate(getDoneItems(val)) })]);
     const [count, setCount] = useState(0);
     const [keyPressed, setKeyPressed] = useState(0);
-
-    var counts = count
     var AllDetails = todoDetails;
     var DoneList = [donelist]
     var TaskDetails = [];
@@ -150,8 +148,7 @@ const Todo = ({ route }) => {
                 let time_Diff = (TimeInMin - currentTimeInMin);
                 remind = (date_Diff + time_Diff - remind) * 60;
                 try {
-                    counts += 1
-                    setCount(counts);
+                    setCount(count + 1);
                     AllDetails.push(TaskDetails);
                     const InputTaskDetails = JSON.stringify(AllDetails);
                     notify(String(date), String(Time), TaskTitle, Task_Description, remind);
@@ -197,8 +194,8 @@ const Todo = ({ route }) => {
 
                         if (val != 0 && val != undefined && val != null) {
                             if (val[4] == 'Todo') {
-                                if (val[5] == ' ') val[5] = "0"
-                                var targettedTime = parseInt(val[0].substring(0, 2)) * 60 + parseInt(val[0].substring(3, 5)) + parseInt(val[5]) * 60
+                                if (val[5] == null) val[5] = 0
+                                var targettedTime = (parseInt(val[0].substring(0, 2)) * 60) + (parseInt(val[0].substring(3))) + (val[5] * 60)
                                 var targettedTimeHH = Math.trunc(targettedTime / 60)
                                 var targettedTimeMM = Math.trunc(targettedTime % 60)
                                 if (targettedTimeMM > 60) {
@@ -213,37 +210,33 @@ const Todo = ({ route }) => {
 
                                 if (currentTime > targettedTime && date == currentDate) {
                                     val[4] = "Done"
-
-                                    Time = val[0]
-                                    TaskTitle = val[1]
-                                    Task_Description = val[2]
-                                    Priority = val[3]
-                                    Target = val[5]
                                     TaskDetails = []
+                                    setCount(count - 1);
                                     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
                                     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem(`${date}Done`, JSON.stringify(RemainingList));
 
                                     DoneList.push([date, val[0], val[1], val[2], val[3], val[4], val[5]]);
                                     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
-                                    setCount(count - 1);
                                 }
                                 else if (val[0] <= currentTime && currentTime < targettedTime && date == currentDate) {
                                     val[4] = "In Progress"
 
-                                    Time = val[0]
-                                    TaskTitle = val[1]
-                                    Task_Description = val[2]
-                                    Priority = val[3]
-                                    Target = val[5]
-                                    TaskDetails = []
-                                    setCount(count - 1)
+                                    Time = val[0];
+                                    TaskTitle = val[1];
+                                    Task_Description = val[2];
+                                    Priority = val[3];
+                                    Target = val[5];
+                                    TaskDetails = [];
+                                    setCount(count - 1);
                                     saveTodo(val[4]);
                                 }
                                 else {
                                     items += 1;
                                     return <TouchableOpacity key={`#${Math.random()}`} onPress={() => { setStateDetails(true); valuesets = []; setDatas(val); items -= 1 }}>
-                                        <View style={{ marginTop: 20, marginBottom: -10, ...styles.todoHeader }}>
+                                        <View style={{
+                                            marginTop: windowHeight / 35, marginBottom: -windowHeight / 60, ...styles.todoHeader
+                                        }}>
                                             <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, ...styles.slno }}>#{items}</Text>
 
                                             <Text key={Math.random()} style={{ paddingTop: windowHeight / 142.09, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{val[0]}</Text>
@@ -358,7 +351,7 @@ const Todo = ({ route }) => {
                     </View>
                 </View>
             </Modal>
-            <View style={{ height: windowHeight / 17.05, position: 'relative', marginTop: windowHeight / 1.97, marginHorizontal: 5 }}>
+            <View style={{ height: windowHeight / 17.05, position: 'absolute', marginTop: windowHeight / 1.17, marginHorizontal: windowWidth / 20 }}>
                 <TouchableOpacity onPress={removeTodo}>
                     <View style={styles.buttonViewDone}>
                         <Text style={styles.buttonDoneText}>
@@ -370,7 +363,7 @@ const Todo = ({ route }) => {
                     </View>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 };
 const styles = StyleSheet.create({
@@ -415,7 +408,7 @@ const styles = StyleSheet.create({
     },
     headText: {
         color: '#03CAD9',
-        fontSize: 30,
+        fontSize: windowWidth / 15,
         fontStyle: 'italic',
         fontFamily: 'serif'
     },
@@ -424,9 +417,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#124267',
         width: windowWidth,
-        minHeight: 60,
+        minHeight: windowHeight / 6,
         maxHeight: windowHeight / 2.25,
-        marginTop: 310,
+        marginTop: windowHeight / 2.5,
         marginBottom: 90,
         borderRadius: 12,
         elevation: 40
@@ -435,7 +428,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'serif',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: windowWidth / 13,
         marginLeft: windowWidth / 41.42,
         padding: windowWidth / 41.42
     },
@@ -488,7 +481,7 @@ const styles = StyleSheet.create({
     },
     ModalText: {
         color: 'white',
-        fontSize: 20,
+        fontSize: windowWidth / 21,
         padding: windowHeight / 42.62
     },
     ModalTextView: {
@@ -551,7 +544,7 @@ const styles = StyleSheet.create({
     detailsPaneText: {
         color: 'white',
         fontFamily: 'serif',
-        fontSize: 15,
+        fontSize: windowWidth / 25.9,
     },
     trash: {
         paddingTop: windowHeight / 85.257,
@@ -591,12 +584,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'italic',
         fontFamily: 'serif',
-        fontSize: 15,
+        fontSize: windowWidth / 25.9,
         textAlign: 'center',
     },
     removeAllIcon: {
-        marginLeft: windowWidth / 3.5,
-        marginRight: -windowWidth / 4.5714,
+        marginLeft: windowWidth / 4,
+        marginRight: -windowWidth / 5,
 
     }
 });

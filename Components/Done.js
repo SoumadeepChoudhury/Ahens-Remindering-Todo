@@ -63,31 +63,6 @@ const Done = ({ route }) => {
 
                         if (val != 0 && val != undefined && val != null) {
                             items += 1;
-                            // var targettedTime = parseInt(val[0].substring(0, 2)) * 60 + parseInt(val[0].substring(3, 5)) + parseInt(val[5]) * 60
-                            // var targettedTimeHH = Math.trunc(targettedTime / 60)
-                            // var targettedTimeMM = Math.trunc(targettedTime % 60)
-                            // if (targettedTimeMM > 60) {
-                            //     targettedTimeHH += targettedTimeMM / 60
-                            //     targettedTimeMM = targettedTimeMM % 60
-                            // }
-                            // targettedTime = String(targettedTimeHH) + ":" + String(targettedTimeMM);
-                            // if (currentTime > targettedTime && date == currentDate) {
-                            //     ("Done", val)
-                            //     val[4] = "Done"
-                            //     Time = val[0]
-                            //     TaskTitle = val[1]
-                            //     Task_Description = val[2]
-                            //     Priority = val[3]
-                            //     Target = val[5]
-                            //     TaskDetails = []
-                            //     var RemainingList = AllDetails.filter((item) => item != [val[0], val[1], val[2], val[3], "Todo", val[5]]);
-                            //     RemainingList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                            //     AsyncStorage.setItem(`${date}`, JSON.stringify(RemainingList));
-                            //     DoneList.push([val[0], val[1], val[2], val[3], val[4], val[5]]);
-                            //     AsyncStorage.setItem("Done", JSON.stringify(DoneList));
-                            //     setCount(count - 1);
-                            // }
-                            // else
                             return <View key={`#${items}`} style={{ marginTop: 20, marginBottom: -10, ...styles.todoHeader }}>
                                 <Text style={date == "All" ? { paddingTop: 12, ...styles.slno, marginLeft: -65 } : { paddingTop: 12, ...styles.slno }}>#{date == "All" ? val[0].substring(2) : items}</Text>
                                 <Text style={{ paddingTop: 12, textDecorationLine: 'underline', ...styles.todoHeaderTitles }}>{date == "All" ? val[1] : val[0]}</Text>
@@ -147,7 +122,7 @@ const styles = StyleSheet.create({
     },
     headText: {
         color: '#03CAD9',
-        fontSize: 30,
+        fontSize: windowWidth / 15,
         fontStyle: 'italic',
         fontFamily: 'serif'
     },
@@ -156,9 +131,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#124267',
         width: windowWidth,
-        minHeight: 60,
+        minHeight: windowHeight / 6,
         maxHeight: windowHeight / 2.25,
-        marginTop: 310,
+        marginTop: windowHeight / 2.5,
         marginBottom: 90,
         borderRadius: 12,
         elevation: 40
@@ -167,7 +142,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'serif',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: windowWidth / 13,
         marginLeft: windowWidth / 41.42,
         padding: windowWidth / 41.42
     },
